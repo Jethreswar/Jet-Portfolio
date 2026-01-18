@@ -259,6 +259,7 @@ interface CertificationProps {
   bgColor: string;
   icon?: string;
   delay?: number;
+  link?: string;
 }
 
 function CertificationCard({
@@ -267,6 +268,7 @@ function CertificationCard({
   bgColor,
   icon,
   delay = 0,
+  link,
 }: CertificationProps) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -339,24 +341,34 @@ function CertificationCard({
           >
             <div className="h-px w-full bg-gradient-to-r from-transparent via-blue-500/50 to-transparent my-3"></div>
             <div className="flex justify-center space-x-2">
-              <motion.button
-                className="text-xs bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 py-1 px-3 rounded-full flex items-center"
-                whileHover={{
-                  scale: 1.05,
-                  backgroundColor: "rgba(59, 130, 246, 0.3)",
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span>View</span>
-                <ExternalLink size={12} className="ml-1" />
-              </motion.button>
-              <motion.button
-                className="text-xs bg-gray-700/80 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-full"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Verify
-              </motion.button>
+              {link && (
+                <motion.a
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 py-1 px-3 rounded-full flex items-center"
+                  whileHover={{
+                    scale: 1.05,
+                    backgroundColor: "rgba(59, 130, 246, 0.3)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span>View</span>
+                  <ExternalLink size={12} className="ml-1" />
+                </motion.a>
+              )}
+              {link && (
+                <motion.a
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs bg-gray-700/80 hover:bg-gray-700 text-gray-300 py-1 px-3 rounded-full"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Verify
+                </motion.a>
+              )}
             </div>
           </motion.div>
         </div>
@@ -376,52 +388,48 @@ function App() {
 
   const certifications = [
     {
-      title: "AWS Cloud Essentials",
+      title: "AWS Certified Solutions Architect – Associate",
       issuer: "Amazon Web Services",
       bgColor: "bg-gradient-to-br from-orange-500/20 to-yellow-500/20",
-      icon: "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg",
+      icon: "https://images.credly.com/size/680x680/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png",
+      link: "https://www.credly.com/badges/391ae2c1-e25e-41e2-a71e-597d4f8a83f9",
     },
     {
-      title: "Oracle Cloud Foundations Associate",
+      title:
+        "Oracle Cloud Platform Application Integration 2022 Certified Professional",
       issuer: "Oracle",
-      bgColor: "bg-gradient-to-br from-blue-500/20 to-purple-500/20",
-      icon: "https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg",
-    },
-    {
-      title: "Oracle Integration Cloud Professional",
-      issuer: "Oracle",
-      bgColor: "bg-gradient-to-br from-blue-500/20 to-purple-500/20",
-      icon: "https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg",
-    },
-    {
-      title: "LangChain Academy",
-      issuer: "LangChain",
-      bgColor: "bg-gradient-to-br from-green-500/20 to-blue-500/20",
-      icon: "https://python.langchain.com/img/brand/wordmark.png",
+      bgColor: "bg-gradient-to-br from-red-500/20 to-orange-500/20",
+      icon: "https://brm-workforce.oracle.com/pdf/certview/images/OCPAI2022CP.png",
+      link: "https://catalog-education.oracle.com/pls/certview/sharebadge?id=C43E1BF4E898BE5D2DB1E736CD03BA558DFBC7234B8AADA8972EAB8E8AD246D8",
     },
   ];
 
   const projects = [
     {
-      title: "Real-Time Workout Tracker",
+      title: "Cloud Banking Modernization Platform",
       description:
-        "JavaScript, MongoDB, React, Express, Node.js | Engineered a MERN stack workout tracker with real-time activity logging and CRUD operations, delivering 98% API uptime and supporting concurrent user sessions without latency degradation. Optimized MongoDB queries, boosting database performance by 25%.",
+        "ReactJS, TypeScript, Spring Boot, Kafka, Azure | Engineered a cloud banking platform supporting high-volume deposit and payment processing with event-driven microservices, API gateways, and real-time dashboards. Implemented PCI-DSS compliant architectures with OAuth2/JWT security and zero-trust principles.",
     },
     {
-      title: "Student Registration App",
+      title: "Content Streaming & Billing Platform",
       description:
-        "Java, SpringBoot, Oracle DB, React, JDBC | Co-developed a full-stack Student Registration System with Spring Boot and React, improving application scalability and UI/UX efficiency by 85%. Increased API throughput by 26.7% using Spring Data JPA with Hibernate and HikariCP.",
+        "Angular, RxJS, NgRx, Spring Boot, AWS | Built secure, scalable platforms for content streaming, billing, and customer account services. Developed reusable UI components with state management, optimized MongoDB layers with Redis caching, and automated CI/CD pipelines with blue/green deployments.",
     },
     {
-      title: "LMS Quiz Generator",
+      title: "Global Retail & E-Commerce Platform",
       description:
-        "Python, Django, PostgreSQL, HTML, CSS | Built a Django-based quiz management platform with PostgreSQL, enabling real-time quiz generation, auto-grading, and role-based access control. Achieved 95% test coverage with robust validation and error handling across the platform.",
+        "ReactJS, Redux, Spring Boot, AWS, Kubernetes | Contributed to scalable digital retail platforms with real-time inventory synchronization and order-tracking workflows. Enhanced performance with code-splitting, lazy-loading, and Redis caching across global storefronts.",
+    },
+    {
+      title: "Healthcare Clinical Workflow System",
+      description:
+        "Java, Spring MVC, PostgreSQL, Docker | Developed healthcare application modules with SOAP/REST APIs for patient engagement, appointment scheduling, and billing. Ensured HIPAA compliance with secure data layers and automated CI/CD pipelines.",
     },
   ];
 
   const skills = [
     {
-      category: "Programming Languages",
+      category: "Languages & Core Technologies",
       skills: [
         {
           name: "Java",
@@ -432,125 +440,113 @@ function App() {
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
         },
         {
-          name: "Python",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-        },
-        {
-          name: "C",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg",
-        },
-        {
-          name: "C++",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
+          name: "TypeScript",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
         },
         {
           name: "JavaScript",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
         },
         {
-          name: "TypeScript",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+          name: "HTML5",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+        },
+        {
+          name: "CSS3/SCSS",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
         },
         {
           name: "SQL",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
         },
         {
-          name: "HTML",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-        },
-        {
-          name: "CSS",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+          name: "GraphQL",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg",
         },
       ],
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
       color: "bg-blue-500/20",
     },
     {
-      category: "Development Tools & Software",
+      category: "Frontend Frameworks & Libraries",
       skills: [
         {
-          name: "Git",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+          name: "ReactJS",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
         },
         {
-          name: "VS Code",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
+          name: "Angular",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg",
         },
         {
-          name: "Docker",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+          name: "Redux",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
         },
         {
-          name: "Postman",
-          icon: "https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg",
+          name: "Tailwind CSS",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+        },
+        {
+          name: "Bootstrap",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
+        },
+        {
+          name: "Vite",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg",
+        },
+        {
+          name: "Webpack",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg",
+        },
+        {
+          name: "RxJS/NgRx",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg",
+        },
+      ],
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      color: "bg-cyan-500/20",
+    },
+    {
+      category: "Backend & Java Frameworks",
+      skills: [
+        {
+          name: "Spring Boot",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
         },
         {
           name: "Spring MVC",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
         },
         {
-          name: "Apache Camel",
-          icon: "https://www.vectorlogo.zone/logos/apache_camel/apache_camel-icon.svg",
+          name: "Spring Security",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
         },
         {
-          name: "Kubernetes",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg",
-        },
-        {
-          name: "Jenkins",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg",
-        },
-        {
-          name: "Android Studio",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg",
-        },
-      ],
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-      color: "bg-green-500/20",
-    },
-    {
-      category: "Frameworks & Technologies",
-      skills: [
-        {
-          name: "React",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+          name: "Hibernate ORM",
+          icon: "https://www.vectorlogo.zone/logos/hibernate/hibernate-icon.svg",
         },
         {
           name: "Node.js",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
         },
         {
-          name: "Express",
+          name: "Express.js",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
         },
         {
-          name: "Django",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",
+          name: "NestJS",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
         },
         {
-          name: "Flask",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg",
-        },
-        {
-          name: "Spring Boot",
+          name: "Project Reactor",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
         },
-        {
-          name: "Hibernate",
-          icon: "https://www.vectorlogo.zone/logos/hibernate/hibernate-icon.svg",
-        },
-        {
-          name: "J2EE",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
-        },
       ],
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-      color: "bg-purple-500/20",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
+      color: "bg-green-500/20",
     },
     {
-      category: "Databases",
+      category: "Databases & Caching",
       skills: [
         {
           name: "PostgreSQL",
@@ -561,16 +557,16 @@ function App() {
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
         },
         {
-          name: "Oracle DB",
-          icon: "https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg",
-        },
-        {
           name: "MySQL",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
         },
         {
-          name: "Firebase",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
+          name: "Redis",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
+        },
+        {
+          name: "Azure Cosmos DB",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
         },
         {
           name: "DynamoDB",
@@ -578,10 +574,10 @@ function App() {
         },
       ],
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-      color: "bg-red-500/20",
+      color: "bg-orange-500/20",
     },
     {
-      category: "Cloud Platforms",
+      category: "Cloud & DevOps",
       skills: [
         {
           name: "AWS",
@@ -592,24 +588,71 @@ function App() {
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
         },
         {
-          name: "Oracle Cloud",
-          icon: "https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg",
+          name: "Docker",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
         },
         {
-          name: "Google Cloud",
+          name: "Kubernetes",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg",
+        },
+        {
+          name: "Terraform",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg",
+        },
+        {
+          name: "OpenShift",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redhat/redhat-original.svg",
+        },
+        {
+          name: "Istio",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg",
+        },
+        {
+          name: "GCP",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg",
-        },
-        {
-          name: "AWS Lambda",
-          icon: "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg",
-        },
-        {
-          name: "AWS RDS",
-          icon: "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg",
         },
       ],
       icon: "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg",
       color: "bg-yellow-500/20",
+    },
+    {
+      category: "CI/CD & Messaging",
+      skills: [
+        {
+          name: "Jenkins",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg",
+        },
+        {
+          name: "GitHub Actions",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+        },
+        {
+          name: "Azure DevOps",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
+        },
+        {
+          name: "Kafka",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg",
+        },
+        {
+          name: "RabbitMQ",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rabbitmq/rabbitmq-original.svg",
+        },
+        {
+          name: "SonarQube",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sonarqube/sonarqube-original.svg",
+        },
+        {
+          name: "Git",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+        },
+        {
+          name: "Maven/Gradle",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gradle/gradle-original.svg",
+        },
+      ],
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg",
+      color: "bg-purple-500/20",
     },
   ];
 
@@ -659,7 +702,7 @@ function App() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.7 }}
           >
-            Varada Jethreswar
+            V. Jethreswar
           </motion.h1>
           <motion.h2
             className="text-2xl text-blue-400 mb-8"
@@ -667,8 +710,8 @@ function App() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.9 }}
           >
-            Software Development Engineer | Full-Stack & Cloud Expert | AI/ML &
-            Data Science
+            Lead Software Engineer | Full-Stack & Cloud Expert | Enterprise
+            Solutions Architect
           </motion.h2>
           <motion.p
             className="text-xl mb-6 text-gray-300"
@@ -676,11 +719,12 @@ function App() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.0 }}
           >
-            Software Development Engineer with 3+ years of professional
-            experience at DXC Technology and expertise in building scalable,
-            secure, and cloud-native applications. Proven track record of
-            enhancing backend performance by 76%, improving CI/CD efficiency by
-            65%, and optimizing database operations by 35%.
+            7+ years of progressive experience designing, developing, and
+            deploying secure, scalable enterprise-grade applications across
+            Banking & Financial Services, Media Streaming, Retail, and
+            Healthcare domains. Proven track record leading mission-critical
+            initiatives with CI/CD automation and multi-cloud deployments on AWS
+            and Microsoft Azure.
           </motion.p>
           <motion.div
             className="flex space-x-4"
@@ -703,7 +747,7 @@ function App() {
               <Linkedin size={24} />
             </a>
             <a
-              href="mailto:jvarada@binghamton.edu"
+              href="mailto:varadajet78@gmail.com"
               className="text-gray-400 hover:text-white transition-colors"
               title="Email"
             >
@@ -753,11 +797,11 @@ function App() {
             viewport={{ once: true }}
           >
             <p className="text-gray-300 max-w-2xl mx-auto">
-              Proficient in full-stack development with Java, Kotlin, Python,
-              and JavaScript. Expert in frameworks like Spring Boot, React,
-              Django, and Flask. Experienced with cloud platforms (AWS, Azure,
-              Oracle Cloud), databases (PostgreSQL, MongoDB, Oracle), and modern
-              DevOps practices.
+              Expert in full-stack development with Java, Kotlin, TypeScript,
+              and JavaScript. Proficient in ReactJS, Angular, Spring Boot, and
+              microservices architecture. Extensive experience with AWS, Azure,
+              Kubernetes, and modern DevOps practices including CI/CD
+              automation, event-driven systems, and cloud-native deployments.
             </p>
           </motion.div>
 
@@ -794,51 +838,60 @@ function App() {
             >
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="text-xl font-bold text-white">
-                    DXC Technology
-                  </h3>
-                  <p className="text-blue-400">
-                    Associate Professional Software Engineer
-                  </p>
+                  <h3 className="text-xl font-bold text-white">Fiserv</h3>
+                  <p className="text-blue-400">Lead Software Engineer</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-gray-400">January 2020 – June 2023</p>
-                  <p className="text-gray-400">Bangalore, India</p>
+                  <p className="text-gray-400">January 2025 – Present</p>
+                  <p className="text-gray-400">Dallas, TX, USA</p>
                 </div>
               </div>
+              <p className="text-sm text-blue-300 mb-3">
+                Cloud banking modernization platform for high-volume deposit and
+                payment processing
+              </p>
               <ul className="list-disc pl-5 text-gray-400 space-y-2">
                 <li>
-                  Scaled the UAE Ministry of Finance's e-Dirham platform to 50K+
-                  monthly transactions, improving backend performance by 76.8%
-                  through service orchestration.
+                  Designed and developed modern, data-driven front-end
+                  dashboards using ReactJS and TypeScript for financial
+                  operations, enabling analysts to track KPIs, alerts, and live
+                  transaction insights.
                 </li>
                 <li>
-                  Developed e-Dirham PoS microservices with Oracle SOA Suite,
-                  boosting CI/CD efficiency by 65.4% using Git, Jenkins, and
-                  Docker.
+                  Built reusable, modular UI components with Tailwind CSS, Radix
+                  UI, and responsive design practices, ensuring consistent
+                  rendering across browsers and devices.
                 </li>
                 <li>
-                  Integrated UAE MoF's payment APIs with six national banks via
-                  Oracle ESB, enabling real-time monitoring with ELK and Grafana
-                  and boosting uptime by 82.5%.
+                  Integrated real-time transaction data streams using WebSocket
+                  connections with GraphQL Subscriptions for continuous
+                  visualization of account activities and operational metrics.
                 </li>
                 <li>
-                  Strengthened the 2K+ UAE's federal PoS payments API gateway
-                  security with OAuth2/JWT authentication, OWASP input
-                  validation, and API encryption, eliminating prior
-                  vulnerabilities.
+                  Engineered high-performance backend microservices using
+                  Kotlin, Java (Spring Boot, Spring Cloud), and Node.js
+                  (Express.js, NestJS) for payment processing and event-driven
+                  pipelines.
                 </li>
                 <li>
-                  Architected Maruti Suzuki's DMS 2.0 with SpringBoot MVC and
-                  Apache Camel, enabling real-time inventory and sales
-                  management across 1,200+ dealerships and reducing stored
-                  procedure query latency by 35%.
+                  Implemented Spring Security, OAuth2, OpenID Connect, JWT, and
+                  PASETO tokenization with zero-trust principles, ensuring
+                  PCI-DSS v4 compliance.
                 </li>
                 <li>
-                  Designed VersaFleet systems integration with SAP and Oracle
-                  EBS via Oracle Integration Cloud using REST/SOAP APIs,
-                  enabling real-time data exchange and reducing manual
-                  processing time by 70%.
+                  Integrated Apache Kafka with Azure Event Hubs for high-volume,
+                  low-latency event streams and fault-tolerant real-time data
+                  ingestion across distributed microservices.
+                </li>
+                <li>
+                  Managed scalable cloud-native deployments on Microsoft Azure
+                  leveraging AKS, App Services, Azure SQL Database, Blob
+                  Storage, and Application Insights.
+                </li>
+                <li>
+                  Automated CI/CD pipelines using Azure DevOps, Jenkins, and
+                  GitHub Actions with SonarQube, Checkmarx, and NexusIQ for
+                  code-quality enforcement.
                 </li>
               </ul>
             </motion.div>
@@ -852,38 +905,53 @@ function App() {
             >
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="text-xl font-bold text-white">
-                    Smart Cookie Rewards Pvt. Ltd
-                  </h3>
-                  <p className="text-blue-400">Data Scientist Intern</p>
+                  <h3 className="text-xl font-bold text-white">EchoStar</h3>
+                  <p className="text-blue-400">Sr. Software Engineer</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-gray-400">
-                    September 2024 – December 2024
-                  </p>
-                  <p className="text-gray-400">Livingston, NJ, USA</p>
+                  <p className="text-gray-400">July 2024 – December 2024</p>
+                  <p className="text-gray-400">Englewood, CO, USA</p>
                 </div>
               </div>
+              <p className="text-sm text-blue-300 mb-3">
+                Secure, scalable platforms for content streaming, billing, and
+                customer account services
+              </p>
               <ul className="list-disc pl-5 text-gray-400 space-y-2">
                 <li>
-                  Engineered a multi-format resume parsing pipeline with spaCy,
-                  NLTK, and Gemini API, achieving 95% parsing accuracy across
-                  PDFs, DOCX, and TXT files.
+                  Designed and developed reusable Angular UI components with
+                  RxJS and NgRx for state management, improving rendering speed
+                  and delivering seamless viewing experiences.
                 </li>
                 <li>
-                  Developed custom NER models for skill and entity extraction,
-                  improving classification accuracy by 30% and enabling
-                  automated profiling of 500+ resumes weekly.
+                  Applied expertise in TypeScript, JavaScript, HTML5, and SCSS
+                  to enforce modular architecture and improve maintainability of
+                  enterprise-grade single-page applications.
                 </li>
                 <li>
-                  Enhanced job-matching and experience scoring algorithms,
-                  reducing runtime by 40% while improving match precision for
-                  candidate-role alignment.
+                  Enhanced front-end performance with Angular CLI and Vite for
+                  faster builds, implementing lazy-loading modules and OnPush
+                  change-detection strategy.
                 </li>
                 <li>
-                  Deployed a secure AWS RDS–backed data pipeline with
-                  interactive Streamlit dashboards, scaling analytics to 5,000+
-                  resumes/month with role-based access control.
+                  Developed backend services with Spring Boot, implementing
+                  Singleton, Factory, and DAO design patterns for clean
+                  architecture across distributed microservices.
+                </li>
+                <li>
+                  Optimized MongoDB data layers using Spring Data MongoDB and
+                  Redis-based caching to increase query throughput and reduce
+                  latency.
+                </li>
+                <li>
+                  Deployed and managed cloud-native applications on AWS (EKS,
+                  ECS Fargate, RDS, MongoDB Atlas, ElastiCache, SQS, SNS, API
+                  Gateway, Lambda).
+                </li>
+                <li>
+                  Mentored junior developers in Angular, Spring Boot, and DevOps
+                  practices to improve coding standards and build stronger
+                  engineering culture.
                 </li>
               </ul>
             </motion.div>
@@ -897,40 +965,112 @@ function App() {
             >
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="text-xl font-bold text-white">
-                    Binghamton University
-                  </h3>
-                  <p className="text-blue-400">Research Intern</p>
+                  <h3 className="text-xl font-bold text-white">Decathlon</h3>
+                  <p className="text-blue-400">Software Engineer</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-gray-400">August 2025 – October 2025</p>
-                  <p className="text-gray-400">Binghamton, NY, USA</p>
+                  <p className="text-gray-400">January 2021 – June 2023</p>
+                  <p className="text-gray-400">Bangalore, KA, India</p>
                 </div>
               </div>
               <p className="text-sm text-blue-300 mb-3">
-                Tech Stack: Android Studio, Java, Kotlin, Firebase, GCP
+                Scalable digital retail and e-commerce platforms with real-time
+                inventory synchronization
               </p>
               <ul className="list-disc pl-5 text-gray-400 space-y-2">
                 <li>
-                  Engineered a Jetpack Compose Android app in Kotlin with
-                  Firebase backend, enabling habit tracking, craving management,
-                  and AI-powered support while maintaining a 92% crash-free rate
-                  across 1,000+ sessions.
+                  Developed responsive and modular ReactJS interfaces with
+                  Redux-style state management for store operations, product
+                  management, and customer order tracking.
                 </li>
                 <li>
-                  Integrated Firebase Auth, Firestore, Storage, and Cloud
-                  Functions to deliver real-time sync, notifications, and secure
-                  data handling, boosting daily active usage by 63%.
+                  Enhanced front-end performance with asynchronous rendering,
+                  code-splitting, and lazy-loading techniques, reducing page
+                  load times during high-traffic events.
                 </li>
                 <li>
-                  Modularized app architecture using MVVM + Repository pattern,
-                  optimizing lifecycle management and reducing cold start time
-                  by 35%, which improved user retention by 28%.
+                  Integrated real-time inventory tracking and order
+                  synchronization modules ensuring instant updates on stock
+                  availability and order fulfillment timelines.
                 </li>
                 <li>
-                  Designed data visualization dashboards with charts for
-                  progress tracking and implemented leaderboards & community
-                  chat, driving a 40% increase in engagement.
+                  Optimized MySQL database performance using Hibernate ORM,
+                  refining schema design and applying batch processing for large
+                  retail datasets.
+                </li>
+                <li>
+                  Automated CI/CD pipelines using GitHub Actions and AWS
+                  CodePipeline with continuous integration and standardized
+                  deployments.
+                </li>
+                <li>
+                  Deployed and maintained cloud-native services on AWS using
+                  Elastic Beanstalk, EC2, RDS, S3, and SQS with fault-tolerant
+                  architecture.
+                </li>
+                <li>
+                  Containerized microservices using Docker and Kubernetes,
+                  configuring autoscaling, rolling updates, and self-healing
+                  strategies.
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              className="bg-gray-900 rounded-lg p-6 shadow-lg"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h3 className="text-xl font-bold text-white">HealthAsyst</h3>
+                  <p className="text-blue-400">Associate Software Engineer</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-gray-400">June 2017 – December 2020</p>
+                  <p className="text-gray-400">Bangalore, KA, India</p>
+                </div>
+              </div>
+              <p className="text-sm text-blue-300 mb-3">
+                Healthcare application modules with clinical dashboards and
+                backend systems for patient engagement
+              </p>
+              <ul className="list-disc pl-5 text-gray-400 space-y-2">
+                <li>
+                  Developed responsive JSP-based web forms with client-side
+                  validations for patient intake, appointment scheduling, and
+                  billing information.
+                </li>
+                <li>
+                  Built reusable UI components using HTML, CSS, JavaScript, and
+                  Bootstrap for consistent, cross-browser-compatible patient
+                  portals.
+                </li>
+                <li>
+                  Implemented backend workflows using Java with Spring MVC to
+                  automate appointment scheduling, billing processing, and
+                  medical record updates.
+                </li>
+                <li>
+                  Developed SOAP-based web services using JAX-WS and JAXB for
+                  secure communication with legacy hospital information and
+                  insurance partners.
+                </li>
+                <li>
+                  Built RESTful APIs for integration between patient portals,
+                  EHR systems, and diagnostic modules enabling real-time
+                  synchronization.
+                </li>
+                <li>
+                  Optimized PostgreSQL operations with Hibernate ORM,
+                  implementing indexing strategies to enhance retrieval speeds
+                  for electronic health records.
+                </li>
+                <li>
+                  Automated build and deployment pipelines using GitLab CI/CD
+                  integrated with Nexus Repository and Sonatype IQ Server.
                 </li>
               </ul>
             </motion.div>
@@ -952,7 +1092,7 @@ function App() {
           </motion.h2>
           <div className="space-y-10">
             <motion.div
-              className="bg-gray-900 rounded-lg p-6 shadow-lg"
+              className="bg-gray-900 rounded-lg p-6 shadow-lg border border-gray-700"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -960,115 +1100,20 @@ function App() {
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <h3 className="text-xl font-bold text-white">
-                    Binghamton University, State University of New York
+                    Bachelor's / Master's Degree in Computer Science or Related
+                    Field
                   </h3>
                   <p className="text-blue-400">
-                    Master of Science in Information Systems
+                    Software Engineering & Information Systems
                   </p>
                 </div>
-                <div className="text-right">
-                  <p className="text-gray-400">Graduated May 2025</p>
-                  <p className="text-gray-400">Binghamton, NY, USA</p>
-                </div>
               </div>
-              <p className="text-white font-medium">
-                Thomas J. Watson College of Engineering and Applied Science
-              </p>
-              <p className="text-blue-300 font-medium mt-1">
-                Cumulative GPA: 3.58/4.00
-              </p>
               <p className="text-gray-400 mt-2">
-                Relevant Coursework: Database Systems, Web and Database
-                Security, LLM Foundations & Applications, Applied Machine
-                Learning, Tools for Data Science, Web Information Retrieval and
-                Search, Software Project Management.
+                Strong academic foundation in computer science, software
+                engineering, and information systems with focus on enterprise
+                application development, distributed systems, and cloud
+                computing technologies.
               </p>
-            </motion.div>
-
-            <motion.div
-              className="bg-gray-900 rounded-lg p-6 shadow-lg"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h3 className="text-xl font-bold text-white">
-                    GITAM University
-                  </h3>
-                  <p className="text-blue-400">
-                    Bachelor of Technology in Electronics and Communication
-                    Engineering
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-gray-400">June 2016 – July 2020</p>
-                  <p className="text-gray-400">Visakhapatnam, AP, India</p>
-                </div>
-              </div>
-              <p className="text-blue-300 font-medium mt-1">
-                Cumulative GPA: 3.45/4.00
-              </p>
-              <p className="text-gray-400 mt-2">
-                Relevant Coursework: Programming with C, Object-Oriented
-                Programming with C++, Database Management Systems, Data
-                Structures and Algorithms, Computer Networks, Microprocessors
-                and Interfaces.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Leadership Experience Section */}
-      <section className="py-20 bg-gray-800 relative">
-        <BackgroundPattern />
-        <div className="container mx-auto px-6 max-w-4xl relative z-10">
-          <motion.h2
-            className="text-4xl font-bold mb-12 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Leadership Experience
-          </motion.h2>
-          <div className="space-y-10">
-            <motion.div
-              className="bg-gray-900 rounded-lg p-6 shadow-lg"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h3 className="text-xl font-bold text-white">
-                    Binghamton University Dining Services (BUDS)
-                  </h3>
-                  <p className="text-blue-400">Student Lead</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-gray-400">August 2024 – May 2025</p>
-                  <p className="text-gray-400">Binghamton, NY, USA</p>
-                </div>
-              </div>
-              <ul className="list-disc pl-5 text-gray-400 space-y-2">
-                <li>
-                  Coordinated daily operations with a team of 15+ student
-                  employees, assigning roles and ensuring smooth collaboration
-                  during high-volume service hours.
-                </li>
-                <li>
-                  Mentored and trained new student staff on service protocols,
-                  boosting onboarding efficiency and reducing training time by
-                  20%.
-                </li>
-                <li>
-                  Supported event planning for university functions by managing
-                  student schedules, monitoring task completion, and maintaining
-                  consistent service quality.
-                </li>
-              </ul>
             </motion.div>
           </div>
         </div>
@@ -1094,8 +1139,8 @@ function App() {
             viewport={{ once: true }}
           >
             <p className="text-gray-300 max-w-2xl mx-auto">
-              Professional Oracle cloud certifications demonstrating expertise
-              in cloud infrastructure and integration services
+              Professional certifications demonstrating expertise in AWS cloud
+              architecture and Oracle cloud application integration
             </p>
           </motion.div>
 
@@ -1107,6 +1152,7 @@ function App() {
                 issuer={cert.issuer}
                 bgColor={cert.bgColor}
                 icon={cert.icon}
+                link={cert.link}
                 delay={index * 0.1}
               />
             ))}
@@ -1150,10 +1196,10 @@ function App() {
                         Email
                       </h4>
                       <a
-                        href="mailto:jvarada@binghamton.edu"
+                        href="mailto:varadajet78@gmail.com"
                         className="text-white hover:text-blue-400 transition-colors break-all text-sm md:text-base"
                       >
-                        jvarada@binghamton.edu
+                        varadajet78@gmail.com
                       </a>
                     </div>
                   </div>
@@ -1167,7 +1213,7 @@ function App() {
                         Phone
                       </h4>
                       <p className="text-white text-sm md:text-base">
-                        +1 (607) 595-8513
+                        +1 (607) 323-1064
                       </p>
                     </div>
                   </div>
@@ -1181,7 +1227,7 @@ function App() {
                         Location
                       </h4>
                       <p className="text-white text-sm md:text-base">
-                        Binghamton, NY
+                        Dallas, TX, USA
                       </p>
                     </div>
                   </div>
@@ -1225,7 +1271,7 @@ function App() {
       <footer className="py-8 bg-gray-950 border-t border-gray-800">
         <div className="container mx-auto px-6 text-center">
           <p className="text-gray-400">
-            © {new Date().getFullYear()} Varada Jethreswar. All rights reserved.
+            © {new Date().getFullYear()} V. Jethreswar. All rights reserved.
           </p>
           <p className="text-gray-500 text-sm mt-2">
             Made with React, TypeScript & Framer Motion
